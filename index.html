@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Pokédex Master Edition - Multiplayer Arena</title>
+<title>Pokédex Master Edition - Easy Link Blind Arena</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
@@ -69,7 +69,7 @@ body {
       <div class="flex items-center gap-3">
         <div id="status-orb" class="w-3 h-3 rounded-full bg-yellow-500 animate-pulse shadow-[0_0_10px_rgba(234,179,8,0.7)]"></div>
         <span class="font-display font-black text-xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500">
-          POKÉDEX <span class="text-blue-500 font-medium text-sm tracking-widest ml-1">NET ARENA</span>
+          POKÉDEX <span class="text-blue-500 font-medium text-sm tracking-widest ml-1">BLIND ARENA</span>
         </span>
       </div>
       <nav class="flex gap-2">
@@ -90,14 +90,14 @@ body {
         <h4 class="font-display text-xs font-bold tracking-widest text-blue-400 uppercase">Multiplayer Tactical Link</h4>
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 items-center">
           <div class="lg:col-span-4">
-            <label class="block font-mono text-[10px] text-[var(--text-muted)] uppercase mb-1">Your Live Lobby ID (Share with friend)</label>
-            <input type="text" id="my-peer-id" readonly onclick="this.select()" placeholder="Generating ID..." class="w-full h-9 bg-[var(--bg-deep)] border border-[#2a2a40] text-blue-400 font-mono text-xs rounded px-3 focus:outline-none cursor-pointer" />
+            <label class="block font-mono text-[10px] text-[var(--text-muted)] uppercase mb-1">Your Live Lobby ID (6 Digits)</label>
+            <input type="text" id="my-peer-id" readonly onclick="this.select()" placeholder="Generating ID..." class="w-full h-10 bg-[var(--bg-deep)] border-2 border-blue-900/40 text-blue-400 font-display text-center text-sm font-bold tracking-widest rounded focus:outline-none cursor-pointer" />
           </div>
           <div class="lg:col-span-5">
             <label class="block font-mono text-[10px] text-[var(--text-muted)] uppercase mb-1">Connect to Friend's Lobby ID</label>
             <div class="flex gap-2">
-              <input type="text" id="friend-peer-id" placeholder="Paste friend's ID here..." class="w-full h-9 bg-[var(--bg-deep)] border border-[#2a2a40] font-mono text-xs rounded px-3 text-white focus:outline-none focus:border-blue-500" />
-              <button onclick="connectToFriend()" class="h-9 px-4 bg-blue-600 hover:bg-blue-500 text-white font-display text-xs font-bold tracking-wider rounded transition-colors whitespace-nowrap">CONNECT</button>
+              <input type="text" id="friend-peer-id" placeholder="Enter 6-digit number..." maxlength="6" class="w-full h-10 bg-[var(--bg-deep)] border border-[#2a2a40] font-display text-center text-sm font-bold tracking-widest rounded text-white focus:outline-none focus:border-blue-500" />
+              <button onclick="connectToFriend()" class="h-10 px-5 bg-blue-600 hover:bg-blue-500 text-white font-display text-xs font-bold tracking-wider rounded transition-colors whitespace-nowrap">CONNECT</button>
             </div>
           </div>
           <div class="lg:col-span-3 text-right">
@@ -137,21 +137,21 @@ body {
     </section>
 
     <section id="sec-team" class="space-y-6 hidden">
-      <div id="alpha-panel" class="border border-cyan-900 bg-[var(--bg-surface)] rounded-lg p-6 transition-all">
+      <div id="alpha-panel" class="border border-cyan-900 bg-[var(--bg-surface)] rounded-lg p-6">
         <div class="flex justify-between items-center mb-4">
           <div>
             <h2 class="font-display font-bold text-lg tracking-wider text-cyan-400">ALPHA SQUAD (TEAM 01) <span id="alpha-role-tag" class="text-xs bg-cyan-950 text-cyan-300 px-2 py-0.5 ml-2 rounded border border-cyan-800 hidden">YOU</span></h2>
             <p class="text-xs text-[var(--text-muted)] font-mono">First lineup composition</p>
           </div>
-          <span id="alpha-bst" class="font-mono text-xs text-cyan-500 bg-cyan-950/30 px-2 py-1 rounded border border-cyan-900/50">Total BST: 0</span>
+          <span id="alpha-bst" class="font-mono text-xs text-cyan-500 bg-cyan-950/30 px-2 py-1 rounded border border-cyan-900/50">Total BST: ???</span>
         </div>
         <div id="alpha-slots-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4"></div>
       </div>
 
       <div class="border border-[#1e1e2f] bg-[var(--bg-deep)] rounded-lg p-6 text-center space-y-4 shadow-xl">
         <div class="font-display text-xl font-black text-gray-400 tracking-widest">VS</div>
-        <button onclick="runSquadBattle()" class="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-display text-xs font-bold tracking-widest rounded transition-all shadow-lg shadow-blue-500/20 active:scale-95">
-          CALCULATE SHOWDOWN WIN RATE
+        <button id="battle-btn" onclick="revealAndBattle()" class="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-display text-xs font-bold tracking-widest rounded transition-all shadow-lg shadow-blue-500/20 active:scale-95">
+          LOCK IN & RUN SHOWDOWN FORECAST
         </button>
         
         <div id="battle-panel" class="hidden max-w-2xl mx-auto p-4 rounded border border-[#2a2a40] bg-[var(--bg-surface)] text-left space-y-3">
@@ -170,13 +170,13 @@ body {
         </div>
       </div>
 
-      <div id="bravo-panel" class="border border-purple-900 bg-[var(--bg-surface)] rounded-lg p-6 transition-all">
+      <div id="bravo-panel" class="border border-purple-900 bg-[var(--bg-surface)] rounded-lg p-6">
         <div class="flex justify-between items-center mb-4">
           <div>
             <h2 class="font-display font-bold text-lg tracking-wider text-purple-400">BRAVO SQUAD (TEAM 02) <span id="bravo-role-tag" class="text-xs bg-purple-950 text-purple-300 px-2 py-0.5 ml-2 rounded border border-purple-800 hidden">YOU</span></h2>
             <p class="text-xs text-[var(--text-muted)] font-mono">Second lineup composition</p>
           </div>
-          <span id="bravo-bst" class="font-mono text-xs text-purple-500 bg-purple-950/30 px-2 py-1 rounded border border-purple-900/50">Total BST: 0</span>
+          <span id="bravo-bst" class="font-mono text-xs text-purple-500 bg-purple-950/30 px-2 py-1 rounded border border-purple-900/50">Total BST: ???</span>
         </div>
         <div id="bravo-slots-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4"></div>
       </div>
@@ -225,7 +225,8 @@ body {
   // Multiplayer Engine State
   let peerInstance = null;
   let netConnection = null;
-  let assignedSquad = 'alpha'; // Default configuration is Alpha unless connecting to host
+  let assignedSquad = 'alpha'; 
+  let teamsRevealed = false; 
 
   window.addEventListener('DOMContentLoaded', async () => {
     populateTypeFilter();
@@ -233,61 +234,73 @@ body {
     await fetchInstantData();
   });
 
-  // ── MULTIPLAYER NETWORK CONTROLLER ─────────────────────────────────────────
+  // ── EASY LINK MULTIPLAYER MATRIX CONTROLLER ────────────────────────────────
+  function generateEasyNumericId() {
+    // Returns a highly readible 6-digit room code (e.g., 492041)
+    return String(Math.floor(100000 + Math.random() * 900000));
+  }
+
   function initMultiplayerEngine() {
-    peerInstance = new Peer();
+    const easyCode = generateEasyNumericId();
+    
+    // Pass the custom 6-digit string directly to PeerJS to declare as your ID
+    peerInstance = new Peer(easyCode);
 
     peerInstance.on('open', (id) => {
       document.getElementById('my-peer-id').value = id;
     });
 
-    // Listening for a connecting friend (acting as Host)
     peerInstance.on('connection', (conn) => {
-      if (netConnection) {
-        conn.close(); // Only 2 players max allowed
-        return;
-      }
+      if (netConnection) { conn.close(); return; }
       netConnection = conn;
-      assignedSquad = 'alpha'; // Host holds Alpha
+      assignedSquad = 'alpha'; 
       setupNetworkLobby();
     });
 
     peerInstance.on('error', (err) => {
-      console.error('Network Engine Exception:', err);
-      alert('Network linking failed. Ensure proper connection matrix.');
+      // If the code happens to already be taken on the public PeerJS server, automatically retry once
+      if (err.type === 'unavailable-id') {
+        const fallbackCode = generateEasyNumericId();
+        peerInstance = new Peer(fallbackCode);
+        peerInstance.on('open', (id) => { document.getElementById('my-peer-id').value = id; });
+        return;
+      }
+      console.error(err);
     });
   }
 
   function connectToFriend() {
     const targetId = document.getElementById('friend-peer-id').value.trim();
-    if (!targetId) return alert('Enter a valid friend identification hash.');
+    if (!targetId || targetId.length !== 6) return alert('Enter a valid 6-digit room number.');
     
     netConnection = peerInstance.connect(targetId);
-    assignedSquad = 'bravo'; // Connector takes Bravo Squad
+    assignedSquad = 'bravo'; 
     setupNetworkLobby();
   }
 
   function setupNetworkLobby() {
     netConnection.on('open', () => {
       updateNetworkStatus(true);
-      // Synchronize existing localized lineups to friend
       broadcastSquadState();
     });
 
     netConnection.on('data', (data) => {
       if (data.type === 'SQUAD_UPDATE') {
-        if (data.squadSide === 'alpha') {
-          squadAlpha = data.payload;
-        } else {
-          squadBravo = data.payload;
-        }
+        if (data.squadSide === 'alpha') squadAlpha = data.payload;
+        else squadBravo = data.payload;
+        
         document.getElementById('team-badge').textContent = `A:${squadAlpha.length} | B:${squadBravo.length}`;
         if(document.getElementById('sec-team').style.display === 'block') renderTeamSlots();
+      }
+      if (data.type === 'REVEAL_SIGNAL') {
+        teamsRevealed = true;
+        renderTeamSlots();
+        executeBattleLogic();
       }
     });
 
     netConnection.on('close', () => {
-      alert('Tactical link broken. Returning to sandbox matrix.');
+      alert('Tactical link closed.');
       netConnection = null;
       updateNetworkStatus(false);
     });
@@ -296,13 +309,13 @@ body {
   function updateNetworkStatus(connected) {
     const textSpan = document.getElementById('network-status-text');
     const statusOrb = document.getElementById('status-orb');
+    teamsRevealed = false; 
+    document.getElementById('battle-panel').classList.add('hidden');
     
     if (connected) {
       textSpan.textContent = `LINK ESTABLISHED (${assignedSquad.toUpperCase()})`;
       textSpan.className = "inline-block text-xs font-mono font-bold text-green-500 bg-green-950/20 border border-green-900/40 px-2 py-1 rounded";
       statusOrb.className = "w-3 h-3 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.7)]";
-      
-      // Update role indicators inside Showdown Arena
       document.getElementById('alpha-role-tag').style.display = assignedSquad === 'alpha' ? 'inline' : 'none';
       document.getElementById('bravo-role-tag').style.display = assignedSquad === 'bravo' ? 'inline' : 'none';
     } else {
@@ -324,7 +337,7 @@ body {
     }
   }
 
-  // ── CORE APPLICATION LOGIC ─────────────────────────────────────────────────
+  // ── APPLICATION UTILITY CONTROLLERS ────────────────────────────────────────
   function handleImgError(imageElement, id) {
     if (!imageElement.dataset.fallbackLevel) {
       imageElement.dataset.fallbackLevel = "1";
@@ -341,9 +354,7 @@ body {
     const s = document.getElementById('filter-type');
     Object.keys(TC).sort().forEach(t => {
       const o = document.createElement('option');
-      o.value = t;
-      o.textContent = t.toUpperCase();
-      s.appendChild(o);
+      o.value = t; o.textContent = t.toUpperCase(); s.appendChild(o);
     });
   }
 
@@ -351,35 +362,20 @@ body {
     try {
       const res = await fetch('https://pokeapi.co/api/v2/pokemon-species?limit=1025');
       const data = await res.json();
-      
       dataset = data.results.map((p, index) => {
         const id = index + 1;
-        let types = ['normal']; 
-        let bst = null;
-        
+        let types = ['normal']; let bst = null;
         if (id === 448) { types = ['fighting', 'steel']; bst = 525; } 
         if (id === 658) { types = ['water', 'dark']; bst = 530; }                                 
         if (id === 25)  { types = ['electric']; bst = 320; }                                      
         if (id === 6  ) { types = ['fire', 'flying']; bst = 534; }                                
-
-        return {
-          id: id,
-          name: p.name,
-          types: types, 
-          bst: bst,
-          lazyLoaded: false
-        };
+        return { id: id, name: p.name, types: types, bst: bst, lazyLoaded: false };
       });
-
       document.getElementById('loader').classList.add('hidden');
-      const grid = document.getElementById('poke-grid');
-      grid.classList.remove('hidden');
-      
+      document.getElementById('poke-grid').classList.remove('hidden');
       renderGrid(dataset);
       fetchBackgroundDetails();
-    } catch (e) {
-      console.error("Instant loader error:", e);
-    }
+    } catch (e) { console.error(e); }
   }
 
   async function fetchBackgroundDetails() {
@@ -391,15 +387,10 @@ body {
           const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${p.id}`);
           const d = await res.json();
           p.types = d.types.map(t => t.type.name);
-          p.stats = {
-            hp: d.stats[0].base_stat, atk: d.stats[1].base_stat, def: d.stats[2].base_stat,
-            spAtk: d.stats[3].base_stat, spDef: d.stats[4].base_stat, speed: d.stats[5].base_stat
-          };
+          p.stats = { hp: d.stats[0].base_stat, atk: d.stats[1].base_stat, def: d.stats[2].base_stat, spAtk: d.stats[3].base_stat, spDef: d.stats[4].base_stat, speed: d.stats[5].base_stat };
           p.bst = d.stats.reduce((acc, s) => acc + s.base_stat, 0);
           p.abilities = d.abilities.map(a => ({ name: a.ability.name.replace(/-/g,' '), hidden: a.is_hidden }));
-          p.weight = d.weight / 10;
-          p.height = d.height / 10;
-          p.lazyLoaded = true;
+          p.weight = d.weight / 10; p.height = d.height / 10; p.lazyLoaded = true;
         } catch(e){}
       }));
       if (i < 100 || i % 150 === 0) applyFilters(); 
@@ -409,32 +400,23 @@ body {
   function renderGrid(list) {
     const container = document.getElementById('poke-grid');
     if(list.length === 0) {
-      container.innerHTML = `<div class="col-span-full py-12 text-center text-[var(--text-muted)] font-mono text-xs">NO RESULTS MATCH SEARCH PARAMETERS</div>`;
+      container.innerHTML = `<div class="col-span-full py-12 text-center text-[var(--text-muted)] font-mono text-xs">NO PARAMETERS MATCHED</div>`;
       return;
     }
-
     container.innerHTML = list.map(p => {
-      const mainType = p.types[0];
-      const color = TC[mainType] || '#333';
-      const formattedId = String(p.id).padStart(3, '0');
-      
+      const color = TC[p.types[0]] || '#333';
       return `
-        <div onclick="openModal(${p.id})" class="bg-[var(--bg-card)] border border-[#1e1e2f] rounded-lg p-3 cursor-pointer transition-all duration-300 hover:-translate-y-1 relative group overflow-hidden">
-          <div class="absolute top-0 left-0 right-0 h-[2px] opacity-40 group-hover:opacity-100 transition-opacity" style="background:${color}"></div>
-          <div class="flex justify-between items-center mb-2 font-mono text-[10px] text-[var(--text-muted)]">
-            <span>#${formattedId}</span>
+        <div onclick="openModal(${p.id})" class="bg-[var(--bg-card)] border border-[#1e1e2f] rounded-lg p-3 cursor-pointer transition-all hover:-translate-y-1 relative group overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-[2px]" style="background:${color}"></div>
+          <div class="flex justify-between font-mono text-[10px] text-[var(--text-muted)] mb-2">
+            <span>#${String(p.id).padStart(3, '0')}</span>
             <span>${p.bst ? 'BST ' + p.bst : 'SYNCING'}</span>
           </div>
-          <div class="h-28 w-full flex items-center justify-center mb-3 bg-black/20 rounded p-2 relative">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${p.id}.png" 
-                 onerror="handleImgError(this, ${p.id})"
-                 alt="${p.name}" 
-                 class="max-h-full max-w-full object-contain filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.6)] group-hover:scale-110 transition-transform duration-300"/>
+          <div class="h-28 w-full flex items-center justify-center mb-3 bg-black/20 rounded p-2">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${p.id}.png" onerror="handleImgError(this, ${p.id})" class="max-h-full max-w-full object-contain filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.6)] group-hover:scale-110 transition-transform duration-300"/>
           </div>
-          <h3 class="font-display font-bold text-sm tracking-wide text-[var(--text-primary)] capitalize mb-2 truncate">${p.name.replace(/-/g,' ')}</h3>
-          <div class="flex gap-1.5">
-            ${p.types.map(t => `<span class="font-display text-[10px] font-bold px-2 py-0.5 rounded tracking-wider text-white" style="background:${TC[t] || '#666'}">${t.toUpperCase()}</span>`).join('')}
-          </div>
+          <h3 class="font-display font-bold text-sm text-[var(--text-primary)] capitalize mb-2 truncate">${p.name.replace(/-/g,' ')}</h3>
+          <div class="flex gap-1.5">${p.types.map(t => `<span class="font-display text-[10px] font-bold px-2 py-0.5 rounded text-white" style="background:${TC[t]}">${t.toUpperCase()}</span>`).join('')}</div>
         </div>
       `;
     }).join('');
@@ -444,127 +426,55 @@ body {
     const search = document.getElementById('search-input').value.toLowerCase().trim();
     const type = document.getElementById('filter-type').value;
     const sort = document.getElementById('sort-order').value;
-
-    let filtered = dataset.filter(p => {
-      const normalizedName = p.name.replace(/-/g, ' ');
-      const matchSearch = p.name.includes(search) || normalizedName.includes(search) || String(p.id) === search;
-      const matchType = !type || p.types.includes(type);
-      return matchSearch && matchType;
-    });
-
+    let filtered = dataset.filter(p => (p.name.includes(search) || String(p.id) === search) && (!type || p.types.includes(type)));
     if (sort === 'id-asc') filtered.sort((a,b) => a.id - b.id);
     else if (sort === 'id-desc') filtered.sort((a,b) => b.id - a.id);
     else if (sort === 'name-asc') filtered.sort((a,b) => a.name.localeCompare(b.name));
-
     renderGrid(filtered);
   }
 
   async function openModal(id) {
-    let p = dataset.find(x => x.id === id);
-    if(!p) return;
-
+    let p = dataset.find(x => x.id === id); if(!p) return;
     const mContent = document.getElementById('modal-content');
     document.getElementById('modal').classList.remove('hidden');
     
     if (!p.lazyLoaded) {
-      mContent.innerHTML = `<div class="p-12 text-center font-mono text-xs text-blue-400 animate-pulse">PULLING LIVE TACTICAL PROFILE DATA FOR ID #${id}...</div>`;
+      mContent.innerHTML = `<div class="p-12 text-center font-mono text-xs text-blue-400 animate-pulse">RESOLVING PROFILE DATA FOR ID #${id}...</div>`;
       try {
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         const d = await res.json();
         p.types = d.types.map(t => t.type.name);
-        p.stats = {
-          hp: d.stats[0].base_stat, atk: d.stats[1].base_stat, def: d.stats[2].base_stat,
-          spAtk: d.stats[3].base_stat, spDef: d.stats[4].base_stat, speed: d.stats[5].base_stat
-        };
-        p.bst = d.stats.reduce((acc, s) => acc + s.base_stat, 0);
-        p.abilities = d.abilities.map(a => ({ name: a.ability.name.replace(/-/g,' '), hidden: a.is_hidden }));
-        p.weight = d.weight / 10;
-        p.height = d.height / 10;
-        p.lazyLoaded = true;
-      } catch (e) {
-        mContent.innerHTML = `<div class="p-6 text-center font-mono text-xs text-red-400">FAILED TO RESOLVE DESTINATION METADATA.</div>`;
-        return;
-      }
+        p.stats = { hp: d.stats[0].base_stat, atk: d.stats[1].base_stat, def: d.stats[2].base_stat, spAtk: d.stats[3].base_stat, spDef: d.stats[4].base_stat, speed: d.stats[5].base_stat };
+        p.bst = d.stats.reduce((acc, s) => acc + s.base_stat, 0); p.lazyLoaded = true;
+      } catch (e) { return; }
     }
 
-    const mainType = p.types[0];
-    const color = TC[mainType] || '#3b82f6';
-    
+    const color = TC[p.types[0]] || '#3b82f6';
     const inAlpha = squadAlpha.some(x => x.id === p.id);
     const inBravo = squadBravo.some(x => x.id === p.id);
-
-    // Disable modifying friend's side when connected online
     const lockAlpha = netConnection && assignedSquad === 'bravo';
     const lockBravo = netConnection && assignedSquad === 'alpha';
 
     mContent.innerHTML = `
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="flex flex-col items-center justify-center bg-black/30 p-4 rounded-lg border border-[#1e1e2f]">
-          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${p.id}.png" 
-               onerror="handleImgError(this, ${p.id})" 
-               alt="${p.name}" 
-               class="w-48 h-48 object-contain filter drop-shadow-[0_10px_15px_rgba(0,0,0,0.7)]"/>
-          <div class="flex gap-2 mt-4">
-            ${p.types.map(t => `<span class="font-display text-xs font-bold px-3 py-1 rounded text-white" style="background:${TC[t]}">${t.toUpperCase()}</span>`).join('')}
-          </div>
-          <div class="grid grid-cols-2 gap-4 w-full mt-6 text-center font-mono text-xs text-[var(--text-muted)] border-t border-[#1e1e2f] pt-4">
-            <div>HEIGHT<p class="text-[var(--text-primary)] font-bold text-sm mt-0.5">${p.height || '??'}m</p></div>
-            <div>WEIGHT<p class="text-[var(--text-primary)] font-bold text-sm mt-0.5">${p.weight || '??'}kg</p></div>
-          </div>
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${p.id}.png" onerror="handleImgError(this, ${p.id})" class="w-48 h-48 object-contain filter drop-shadow-[0_10px_15px_rgba(0,0,0,0.7)]"/>
+          <div class="flex gap-2 mt-4">${p.types.map(t => `<span class="font-display text-xs font-bold px-3 py-1 rounded text-white" style="background:${TC[t]}">${t.toUpperCase()}</span>`).join('')}</div>
         </div>
-
         <div class="space-y-4">
-          <div>
-            <span class="font-mono text-xs text-blue-500 tracking-widest font-bold">#${String(p.id).padStart(3, '0')}</span>
-            <h2 class="font-display font-black text-2xl tracking-wider text-[var(--text-primary)] capitalize">${p.name.replace(/-/g,' ')}</h2>
+          <h2 class="font-display font-black text-2xl tracking-wider capitalize">${p.name.replace(/-/g,' ')}</h2>
+          <div class="space-y-1.5 font-mono text-xs">
+            ${Object.entries(p.stats || {}).map(([sName, sVal]) => `
+              <div class="flex items-center justify-between">
+                <span class="w-16 uppercase text-[var(--text-muted)]">${sName}</span>
+                <span class="w-8 text-right font-bold pr-2">${sVal}</span>
+                <div class="flex-1 h-2 bg-[#141420] rounded-sm overflow-hidden"><div class="h-full" style="width:${Math.min(100, (sVal / 160) * 100)}%; background:${color}"></div></div>
+              </div>
+            `).join('')}
           </div>
-
-          <div class="space-y-2">
-            <h4 class="font-display text-xs font-bold tracking-widest text-[var(--text-muted)] uppercase">Combat Stats (BST: ${p.bst || '---'})</h4>
-            <div class="space-y-1.5 font-mono text-xs">
-              ${p.stats ? Object.entries(p.stats).map(([sName, sVal]) => {
-                const percent = Math.min(100, (sVal / 160) * 100);
-                return `
-                  <div class="flex items-center justify-between">
-                    <span class="w-16 uppercase text-[var(--text-muted)]">${sName}</span>
-                    <span class="w-8 text-right font-bold text-[var(--text-primary)] pr-2">${sVal}</span>
-                    <div class="flex-1 h-2 bg-[#141420] rounded-sm overflow-hidden">
-                      <div class="h-full rounded-sm" style="width:${percent}%; background:${color}"></div>
-                    </div>
-                  </div>
-                `;
-              }).join('') : ''}
-            </div>
-          </div>
-
-          <div class="pt-2">
-            <h4 class="font-display text-xs font-bold tracking-widest text-[var(--text-muted)] uppercase mb-2">Abilities</h4>
-            <div class="flex flex-wrap gap-2">
-              ${p.abilities ? p.abilities.map(a => `
-                <span class="font-mono text-xs px-2.5 py-1 rounded bg-[#1e1e2f] border border-[#2a2a40] text-[var(--text-primary)] capitalize">
-                  ${a.name} ${a.hidden ? '<span class="text-[10px] text-blue-400 font-bold ml-1">(HIDDEN)</span>' : ''}
-                </span>
-              `).join('') : '<span class="text-xs font-mono text-gray-600">None</span>'}
-            </div>
-          </div>
-
           <div class="pt-4 grid grid-cols-2 gap-2">
-            <button onclick="toggleSquadMember(${p.id}, 'alpha')" ${lockAlpha ? 'disabled' : ''} class="py-2 rounded font-display font-bold text-[11px] tracking-wider transition-all border ${
-              lockAlpha ? 'opacity-20 cursor-not-allowed border-gray-800 text-gray-600 bg-transparent' :
-              inAlpha 
-              ? 'bg-red-950/40 text-red-400 border-red-500/30 hover:bg-red-900/40' 
-              : 'bg-cyan-950/40 text-cyan-400 border-cyan-500/40 hover:bg-cyan-900/50'
-            }">
-              ${inAlpha ? 'DISMISS ALPHA' : '+ ALPHA SQUAD'}
-            </button>
-            <button onclick="toggleSquadMember(${p.id}, 'bravo')" ${lockBravo ? 'disabled' : ''} class="py-2 rounded font-display font-bold text-[11px] tracking-wider transition-all border ${
-              lockBravo ? 'opacity-20 cursor-not-allowed border-gray-800 text-gray-600 bg-transparent' :
-              inBravo 
-              ? 'bg-red-950/40 text-red-400 border-red-500/30 hover:bg-red-900/40' 
-              : 'bg-purple-950/40 text-purple-400 border-purple-500/40 hover:bg-purple-900/50'
-            }">
-              ${inBravo ? 'DISMISS BRAVO' : '+ BRAVO SQUAD'}
-            </button>
+            <button onclick="toggleSquadMember(${p.id}, 'alpha')" ${lockAlpha ? 'disabled' : ''} class="py-2 rounded font-display font-bold text-[11px] border ${lockAlpha ? 'opacity-20 cursor-not-allowed' : inAlpha ? 'text-red-400 border-red-500/30' : 'text-cyan-400 border-cyan-500/40'}">${inAlpha ? 'DISMISS ALPHA' : '+ ALPHA SQUAD'}</button>
+            <button onclick="toggleSquadMember(${p.id}, 'bravo')" ${lockBravo ? 'disabled' : ''} class="py-2 rounded font-display font-bold text-[11px] border ${lockBravo ? 'opacity-20 cursor-not-allowed' : inBravo ? 'text-red-400 border-red-500/30' : 'text-purple-400 border-purple-500/40'}">${inBravo ? 'DISMISS BRAVO' : '+ BRAVO SQUAD'}</button>
           </div>
         </div>
       </div>
@@ -574,71 +484,65 @@ body {
   function closeModal() { document.getElementById('modal').classList.add('hidden'); }
 
   function toggleSquadMember(id, squad) {
-    // If online, block player from modifying friend's side
     if (netConnection && squad !== assignedSquad) return;
-
     const targetSquad = squad === 'alpha' ? squadAlpha : squadBravo;
-    const oppositeSquad = squad === 'alpha' ? squadBravo : squadAlpha;
-    
     const idx = targetSquad.findIndex(x => x.id === id);
+    
     if(idx > -1) {
       targetSquad.splice(idx, 1);
     } else {
-      if(targetSquad.length >= 6) {
-        alert(`ROSTER OVERFLOW: ${squad.toUpperCase()} squad allocation capped at maximum limit (6).`);
-        return;
-      }
+      if(targetSquad.length >= 6) return alert('Roster full (6).');
       const p = dataset.find(x => x.id === id);
-      if(p) {
-        const oppIdx = oppositeSquad.findIndex(x => x.id === id);
-        if(oppIdx > -1) {
-          // If online, don't allow modifying or stealing from opposite squad array
-          if (netConnection) return;
-          oppositeSquad.splice(oppIdx, 1);
-        }
-        targetSquad.push(p);
-      }
+      if(p) targetSquad.push(p);
     }
     
+    teamsRevealed = false;
+    document.getElementById('battle-panel').classList.add('hidden');
     document.getElementById('team-badge').textContent = `A:${squadAlpha.length} | B:${squadBravo.length}`;
     closeModal();
-    broadcastSquadState(); // Dispatch configuration array over WebRTC network
+    broadcastSquadState(); 
     if(document.getElementById('sec-team').style.display === 'block') renderTeamSlots();
   }
 
   function renderTeamSlots() {
     renderSquadGrid('alpha', squadAlpha);
     renderSquadGrid('bravo', squadBravo);
-    
-    const alphaBstTotal = squadAlpha.reduce((acc, p) => acc + (p.bst || 0), 0);
-    const bravoBstTotal = squadBravo.reduce((acc, p) => acc + (p.bst || 0), 0);
-    document.getElementById('alpha-bst').textContent = `Total BST: ${alphaBstTotal}`;
-    document.getElementById('bravo-bst').textContent = `Total BST: ${bravoBstTotal}`;
+    const showAlphaBST = !netConnection || assignedSquad === 'alpha' || teamsRevealed;
+    const showBravoBST = !netConnection || assignedSquad === 'bravo' || teamsRevealed;
+    document.getElementById('alpha-bst').textContent = showAlphaBST ? `Total BST: ${squadAlpha.reduce((acc, p) => acc + (p.bst || 0), 0)}` : "Total BST: ???";
+    document.getElementById('bravo-bst').textContent = showBravoBST ? `Total BST: ${squadBravo.reduce((acc, p) => acc + (p.bst || 0), 0)}` : "Total BST: ???";
   }
 
   function renderSquadGrid(squadKey, squadArray) {
     const grid = document.getElementById(`${squadKey}-slots-grid`);
-    const isFriendSide = netConnection && squadKey !== assignedSquad;
+    const isEnemySide = netConnection && squadKey !== assignedSquad;
     let html = '';
 
     for(let i = 0; i < 6; i++) {
       const p = squadArray[i];
       if(p) {
-        html += `
-          <div class="bg-[var(--bg-card)] border border-[#2a2a40] rounded-lg p-4 flex flex-col items-center relative group">
-            ${isFriendSide ? '' : `<button onclick="toggleSquadMember(${p.id}, '${squadKey}')" class="absolute top-2 right-2 text-red-500 hover:text-red-400 font-mono text-xs">&times; DISMISS</button>`}
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${p.id}.png" onerror="handleImgError(this, ${p.id})" alt="${p.name}" class="w-24 h-24 object-contain my-2 filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]"/>
-            <h3 class="font-display font-bold text-sm tracking-wide text-[var(--text-primary)] capitalize truncate w-full text-center">${p.name.replace(/-/g,' ')}</h3>
-            <div class="flex gap-1 mt-2">
-              ${p.types.map(t => `<span class="font-display text-[9px] font-bold px-1.5 py-0.5 rounded text-white" style="background:${TC[t]}">${t.toUpperCase()}</span>`).join('')}
+        if (isEnemySide && !teamsRevealed) {
+          html += `
+            <div class="bg-[var(--bg-surface)] border-2 border-dashed border-red-900/40 rounded-lg p-4 flex flex-col items-center justify-center min-h-[200px] bg-gradient-to-b from-black/40 to-red-950/10">
+              <div class="w-12 h-12 rounded-full border border-red-500/20 flex items-center justify-center text-red-500 font-display font-black text-lg tracking-wider bg-black/40 shadow-[0_0_15px_rgba(239,68,68,0.05)]">?</div>
+              <h3 class="font-mono text-[10px] tracking-widest text-red-400 mt-4 font-bold">READY TO FIGHT</h3>
             </div>
-          </div>
-        `;
+          `;
+        } else {
+          html += `
+            <div class="bg-[var(--bg-card)] border border-[#2a2a40] rounded-lg p-4 flex flex-col items-center relative">
+              ${isEnemySide ? '' : `<button onclick="toggleSquadMember(${p.id}, '${squadKey}')" class="absolute top-2 right-2 text-red-500 font-mono text-xs">&times;</button>`}
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${p.id}.png" onerror="handleImgError(this, ${p.id})" class="w-24 h-24 object-contain my-2 filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]"/>
+              <h3 class="font-display font-bold text-sm text-[var(--text-primary)] capitalize truncate w-full text-center">${p.name.replace(/-/g,' ')}</h3>
+              <div class="flex gap-1 mt-2">${p.types.map(t => `<span class="font-display text-[9px] font-bold px-1.5 py-0.5 rounded text-white" style="background:${TC[t]}">${t.toUpperCase()}</span>`).join('')}</div>
+            </div>
+          `;
+        }
       } else {
         html += `
-          <div ${isFriendSide ? '' : `onclick="showSection('database')"`} class="bg-black/20 border border-dashed border-[#2a2a40] rounded-lg p-4 flex flex-col items-center justify-center min-h-[200px] ${isFriendSide ? '' : 'cursor-pointer hover:bg-black/30'} transition-colors group">
-            <span class="text-2xl text-[#2a2a40] ${isFriendSide ? '' : 'group-hover:text-blue-500 group-hover:scale-110'} transition-all font-light">+</span>
-            <span class="font-mono text-[10px] text-[var(--text-muted)] tracking-widest mt-2 uppercase text-center">${isFriendSide ? 'WAITING FOR FRIEND' : 'VACANT POSITION'}</span>
+          <div ${isEnemySide ? '' : `onclick="showSection('database')"`} class="bg-black/20 border border-dashed border-[#2a2a40] rounded-lg p-4 flex flex-col items-center justify-center min-h-[200px] ${isEnemySide ? '' : 'cursor-pointer hover:bg-black/30'} transition-colors">
+            <span class="text-2xl text-[#2a2a40] font-light">+</span>
+            <span class="font-mono text-[10px] text-[var(--text-muted)] tracking-widest mt-2 text-center uppercase">${isEnemySide ? 'CHOOSING...' : 'VACANT'}</span>
           </div>
         `;
       }
@@ -646,33 +550,27 @@ body {
     grid.innerHTML = html;
   }
 
-  function runSquadBattle() {
+  function revealAndBattle() {
     if (squadAlpha.length === 0 || squadBravo.length === 0) {
-      alert("DEPLOYMENT FAULT: Deploy at least 1 active combatant into both Alpha and Bravo configurations.");
-      return;
+      alert("Deploy combatants to both teams before calculating."); return;
     }
+    teamsRevealed = true; renderTeamSlots(); 
+    if (netConnection && netConnection.open) netConnection.send({ type: 'REVEAL_SIGNAL' });
+    executeBattleLogic();
+  }
 
-    let alphaPoints = 0;
-    let bravoPoints = 0;
-
+  function executeBattleLogic() {
+    let alphaPoints = 0; let bravoPoints = 0;
     squadAlpha.forEach(a => {
       squadBravo.forEach(b => {
-        let aScore = a.bst || 400;
-        let bScore = b.bst || 400;
-
-        const aSpeed = a.stats?.speed || 50;
-        const bSpeed = b.stats?.speed || 50;
-        if (aSpeed > bSpeed) aScore += 20;
-        else if (bSpeed > aSpeed) bScore += 20;
+        let aScore = a.bst || 400; let bScore = b.bst || 400;
+        if ((a.stats?.speed || 50) > (b.stats?.speed || 50)) aScore += 20;
+        else if ((b.stats?.speed || 50) > (a.stats?.speed || 50)) bScore += 20;
 
         a.types.forEach(at => {
           b.types.forEach(bt => {
-            if (TYPE_CHART[at] && TYPE_CHART[at][bt] !== undefined) {
-              aScore *= TYPE_CHART[at][bt];
-            }
-            if (TYPE_CHART[bt] && TYPE_CHART[bt][at] !== undefined) {
-              bScore *= TYPE_CHART[bt][at];
-            }
+            if (TYPE_CHART[at] && TYPE_CHART[at][bt] !== undefined) aScore *= TYPE_CHART[at][bt];
+            if (TYPE_CHART[bt] && TYPE_CHART[bt][at] !== undefined) bScore *= TYPE_CHART[bt][at];
           });
         });
 
@@ -686,8 +584,6 @@ body {
     let alphaPct = Math.round((alphaPoints / totalWeight) * 100);
     let bravoPct = 100 - alphaPct;
 
-    if(alphaPct === bravoPct) { alphaPct = 50; bravoPct = 50; }
-
     document.getElementById('battle-panel').classList.remove('hidden');
     document.getElementById('alpha-rate').textContent = `${alphaPct}%`;
     document.getElementById('bravo-rate').textContent = `${bravoPct}%`;
@@ -695,21 +591,17 @@ body {
     document.getElementById('bravo-progress').style.width = `${bravoPct}%`;
 
     const winHeading = document.getElementById('battle-winner');
-    const winLog = document.getElementById('battle-log');
-
     if (alphaPct > bravoPct) {
       winHeading.textContent = "SQUAD ALPHA FORECASTED VICTORY";
       winHeading.className = "font-display font-black text-sm tracking-wide text-cyan-400";
-      winLog.textContent = "Matrix simulations indicate Alpha holds a distinct speed initiative or structural elemental type advantage against the opposing combat lineup.";
     } else if (bravoPct > alphaPct) {
       winHeading.textContent = "SQUAD BRAVO FORECASTED VICTORY";
       winHeading.className = "font-display font-black text-sm tracking-wide text-purple-400";
-      winLog.textContent = "Matrix simulations indicate Bravo possesses resilient defensive matchup matrices or dominant stat distributions optimized to neutralize Alpha's threats.";
     } else {
       winHeading.textContent = "DEADLOCK PROBABILITY MATCHOUT";
       winHeading.className = "font-display font-black text-sm tracking-wide text-gray-300";
-      winLog.textContent = "Equilibrium detected. Both squads match each other perfectly across speed priority thresholds, baseline points, and structural dual-type parameters.";
     }
+    document.getElementById('battle-log').textContent = "Cross-analysis computational calculations finished processing.";
   }
 
   function showSection(s) {
